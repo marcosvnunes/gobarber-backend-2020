@@ -1,4 +1,4 @@
-import IUserRepository from '@modules/users/infra/repositories/IUsersRepository';
+import IUserRepository from '@modules/users/repositories/IUsersRepository';
 import { inject, injectable } from 'tsyringe';
 import AppError from '@shared/errors/AppError';
 import User from '../infra/typeorm/entities/user';
@@ -14,7 +14,7 @@ class CreateAppointmentService {
   constructor(
     @inject('UsersRepository')
     private userRepository: IUserRepository,
-    @inject('BcryptHashProvider')
+    @inject('HashProvider')
     private hashProvider: IHashProvider
   ) {}
 

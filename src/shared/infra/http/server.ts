@@ -1,4 +1,5 @@
 import 'reflect-metadata';
+import { errors } from 'celebrate';
 import express from 'express';
 import cors from 'cors';
 import uploadConfid from '@config/upload';
@@ -14,9 +15,12 @@ app.use(cors({}));
 app.get('/cadas', (req, res) => {
   res.send();
 });
-app.use('/files', express.static(uploadConfid.dirName));
+app.use('/files', express.static(uploadConfid.uploadFolder));
 app.use(routes);
 
-app.listen(3335, () => {
-  console.log('Server started on port 3335');
+app.use(errors());
+
+const port = 3333;
+app.listen(port, () => {
+  console.log(`Server started on port ${port}`);
 });

@@ -1,6 +1,6 @@
 import { sign } from 'jsonwebtoken';
 import authConfig from '@config/authConfig';
-import IUserRepository from '@modules/users/infra/repositories/IUsersRepository';
+import IUserRepository from '@modules/users/repositories/IUsersRepository';
 import { inject, injectable } from 'tsyringe';
 import AppError from '@shared/errors/AppError';
 import Users from '../infra/typeorm/entities/user';
@@ -21,7 +21,7 @@ class AuthenticateUserService {
     @inject('UsersRepository')
     private userRepository: IUserRepository,
 
-    @inject('BcryptHashProvider')
+    @inject('HashProvider')
     private hashProvider: IHashProvider
   ) {}
 

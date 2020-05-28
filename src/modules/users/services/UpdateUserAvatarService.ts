@@ -1,6 +1,7 @@
-import IUserRepository from '@modules/users/infra/repositories/IUsersRepository';
+import IUserRepository from '@modules/users/repositories/IUsersRepository';
 import { inject, injectable } from 'tsyringe';
-import IStorageProvider from '@shared/container/providers/models/IStorageProvider';
+import IStorageProvider from '@shared/container/providers/StorageProvider/models/IStorageProvider';
+import AppError from '@shared/errors/AppError';
 import User from '../infra/typeorm/entities/user';
 
 interface IRequest {
@@ -21,7 +22,7 @@ class UpdateUserAvatarService {
     const user = await this.userRepository.findById(user_id);
 
     if (!user) {
-      throw new Error('only user authenticated can update avatar');
+      throw new AppError('only user authenticated can update avatar');
     }
 
     if (user.avatar) {
