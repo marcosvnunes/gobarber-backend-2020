@@ -3,7 +3,7 @@ import AppError from '@shared/errors/AppError';
 import ResetPasswordService from './ResetPasswordService';
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 import FakeUsersTokensRepository from '../repositories/fakes/FakeUsersTokensRepository';
-import FakeHashProvider from '../providers/hashProvider/fakes/FakeHashProvider';
+import FakeHashProvider from '../providers/hashProvider/fakes/fakeHashProvider';
 
 describe('ResetPassordService', () => {
   let fakeUserRepository: FakeUsersRepository;

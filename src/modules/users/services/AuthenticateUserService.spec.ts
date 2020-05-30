@@ -1,21 +1,17 @@
 import 'reflect-metadata';
 import AppError from '@shared/errors/AppError';
 import AuthenticateUserService from './AuthenticateUserService';
-import CreateUserService from './CreateUserService';
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
-import FakeHashProvider from '../providers/hashProvider/fakes/FakeHashProvider';
+import FakeHashProvider from '../providers/hashProvider/fakes/fakeHashProvider';
 
 describe('Authenticate', () => {
   let fakeUserRepository: FakeUsersRepository;
   let fakeHashProvider: FakeHashProvider;
-  let createUser: CreateUserService;
   let authenticateUser: AuthenticateUserService;
 
   beforeEach(() => {
     fakeUserRepository = new FakeUsersRepository();
     fakeHashProvider = new FakeHashProvider();
-
-    createUser = new CreateUserService(fakeUserRepository, fakeHashProvider);
 
     authenticateUser = new AuthenticateUserService(
       fakeUserRepository,
@@ -23,7 +19,7 @@ describe('Authenticate', () => {
     );
   });
   it('should be able create a new token of authenticate', async () => {
-    const user = await createUser.execute({
+    const user = await fakeUserRepository.create({
       name: 'joe due',
       email: 'joedue@exemple.com',
       password: '123123',
@@ -38,7 +34,7 @@ describe('Authenticate', () => {
   });
 
   it('should not be able create a new token of authenticate with email incorrect', async () => {
-    await createUser.execute({
+    await fakeUserRepository.create({
       name: 'joe due',
       email: 'joedue@exemple.com',
       password: '123123',
@@ -53,7 +49,7 @@ describe('Authenticate', () => {
   });
 
   it('should not be able create a new token of authenticate with password incorrect', async () => {
-    await createUser.execute({
+    await fakeUserRepository.create({
       name: 'joe due',
       email: 'joedue@exemple.com',
       password: '123123',

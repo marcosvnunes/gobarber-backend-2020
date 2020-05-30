@@ -1,14 +1,20 @@
 import 'reflect-metadata';
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
+import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/fakeCacheProvider';
 import ListProvidersService from './ListProvidersService';
 
 describe('ListProviders', () => {
   let fakeUserRepository: FakeUsersRepository;
   let listProviders: ListProvidersService;
+  let fakeCacheProvider: FakeCacheProvider;
 
   beforeEach(() => {
     fakeUserRepository = new FakeUsersRepository();
-    listProviders = new ListProvidersService(fakeUserRepository);
+    fakeCacheProvider = new FakeCacheProvider();
+    listProviders = new ListProvidersService(
+      fakeUserRepository,
+      fakeCacheProvider
+    );
   });
 
   it('should be able to List all profiles except the user', async () => {
