@@ -46,7 +46,7 @@ class ListProviderDayAvailabilityService {
       );
 
       const compareDate = new Date(year, month - 1, day, hour);
-
+      console.log(currentDate, compareDate);
       return {
         hour,
         availability:

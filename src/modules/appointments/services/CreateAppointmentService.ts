@@ -48,7 +48,8 @@ class CreateAppointmentService {
       throw new AppError("you can't create an appointment on a pass date ");
     }
     const findAppointmentInsameDate = await this.appointmentRepository.findByDate(
-      appointmentDate
+      appointmentDate,
+      provider_id
     );
 
     if (findAppointmentInsameDate) {
