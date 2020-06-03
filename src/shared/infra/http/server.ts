@@ -23,7 +23,7 @@ app.use(routes);
 
 app.use(errors());
 
-const port = 3333;
+const port = 3334;
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
 });
