@@ -28,10 +28,7 @@ class AuthenticateUserService {
     year,
   }: IRequest): Promise<Appointment[]> {
     const cacheKey = `provider-appointments:${provider_id}:${year}-${month}-${day}`;
-    let appointments = await this.cacheProvider.recovery<Appointment[]>(
-      cacheKey
-    );
-
+    let appointments = null;
     if (!appointments) {
       appointments = await this.appontmentRepository.findAllInDayFromProvider({
         provider_id,
