@@ -2,6 +2,7 @@ import IUserRepository from '@modules/users/repositories/IUsersRepository';
 import { inject, injectable } from 'tsyringe';
 import Users from '@modules/users/infra/typeorm/entities/user';
 import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider';
+import { classToClass } from 'class-transformer';
 
 interface IRequest {
   user_id?: string;
@@ -23,7 +24,7 @@ class AuthenticateUserService {
       users = await this.userRepository.findAllProviders({
         except_user_id: user_id,
       });
-      await this.cacheProvider.save(cachekey, users);
+      await this.cacheProvider.save(cachekey, classToClass(users));
     }
 
     return users;
